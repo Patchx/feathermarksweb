@@ -6,17 +6,26 @@
         "watch": "npm run development -- --watch",
         "watch-poll": "npm run watch -- --watch-poll",
         "hot": "cross-env NODE_ENV=development node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --disable-host-check --config=node_modules/laravel-mix/setup/webpack.config.js",
+        "local": "run-s tab:build:npm-watch tab:build:open-site",
         "prod": "npm run production",
-        "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
+        "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+        "tab:build:npm-watch": "ttab -t 'NPM Watch' npm run watch",
+        "tab:build:open-site": "ttab -t 'Openning Site' php artisan serve",
+        "tab:build:js-tests": "ttab -t 'Js Tests' npm run test",
+        "tab:build:php-tests": "ttab -t 'PHP Tests' phpunit",
+        "test": "mocha-webpack js_tests/**/*.spec.js --require test-setup",
+        "test-all": "run-s tab:build:js-tests tab:build:php-tests"
     },
     "devDependencies": {
         "axios": "^0.19",
         "cross-env": "^7.0",
         "laravel-mix": "^5.0.1",
         "lodash": "^4.17.13",
+        "npm-run-all": "^4.1.5",
         "resolve-url-loader": "^3.1.0",
         "sass": "^1.15.2",
         "sass-loader": "^8.0.0",
+        "ttab": "^0.6.1",
         "vue-template-compiler": "^2.6.11"
     },
     "dependencies": {
