@@ -50,7 +50,11 @@ return [
         ],
 
         'mailgun' => [
+            'domain' => env('MAIL_HOST', ''),
+            'secret' => env('MAIL_PASSWORD', ''),
             'transport' => 'mailgun',
+            'username' => env('MAIL_USERNAME'),
+            'password' => env('MAIL_PASSWORD'),
         ],
 
         'postmark' => [
