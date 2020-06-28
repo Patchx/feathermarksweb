@@ -8,13 +8,17 @@
                 <div class="card-header">Dashboard</div>
 
                 <div class="card-body">
-                    @if (session('status'))
+                    @if(session('status'))
                         <div class="alert alert-success" role="alert">
                             {{ session('status') }}
                         </div>
                     @endif
 
-                    You are logged in!
+                    <h5>Your Links</h5>
+
+                    @foreach($links as $link)
+                        <p>Link: {{$link->url}}</p>
+                    @endforeach
                 </div>
             </div>
         </div>

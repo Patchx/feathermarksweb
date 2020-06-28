@@ -21,7 +21,12 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name',
+        'email',
+        'password',
+        'created_at',
+        'updated_at',
+        'custom_id',
     ];
 
     /**
@@ -41,6 +46,15 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    // -----------------
+    // - Relationships -
+    // -----------------
+
+    public function links()
+    {
+        return Link::where('user_id', $this->custom_id)->get();
+    }
 
     // --------------------
     // - Parent Overrides -
