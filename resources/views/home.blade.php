@@ -3,24 +3,8 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-xs-12 col-lg-8">
+        <div class="col-xs-12 col-lg-10">
             <div class="card">
-                <div class="card-header">                    
-                    <select 
-                        class="form-control float-right"
-                        style="width:110px"
-                    >
-                        <option value="personal">Personal</option>
-                        
-                        <option 
-                            value="work"
-                            @if($category === 'work')
-                                selected="true"
-                            @endif 
-                        >Work</option>
-                    </select>
-                </div>
-
                 <div class="card-body">
                     @if(session('msg_success'))
                         <div class="alert alert-success" role="alert">
@@ -116,7 +100,7 @@
                                     <button
                                         type="submit"
                                         class="btn btn-link"
-                                    ><i class="fas fa-times text-danger"></i></button>
+                                    ><i class="fas fa-times text-muted"></i></button>
                                 </form>
 
                                 <a
