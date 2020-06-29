@@ -13,10 +13,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+// ---------------------
+// - LinkWebController -
+// ---------------------
+
+Route::post('/links/create', 'LinkWebController@postCreate');
+Route::post('/links/delete/{link_id}', 'LinkWebController@postDelete');
+
+// -----------------------
+// - StaticWebController -
+// -----------------------
+
+Route::get('/', 'StaticWebController@getIndex');

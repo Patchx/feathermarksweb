@@ -23,11 +23,17 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function index(Request $request)
     {
         $user = Auth::user();
+        $category = $request->cat;
+
+        if ($category === null) {
+            $category = 'personal';
+        }
 
         $data = [
+            'category' => $category,
             'links' => $user->links(),
         ];
 
