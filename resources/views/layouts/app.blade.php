@@ -48,6 +48,7 @@
                                 <select 
                                     class="form-control form-control-sm inline-block"
                                     style="width:110px"
+                                    onchange="window.location.href = '/home?cat=' + this.value" 
                                 >
                                     <option value="personal">Personal</option>
                                     

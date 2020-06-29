@@ -84,10 +84,7 @@
                 <div class="title m-b-md">Feather Marks <i class="fas fa-feather-alt"></i></div>
 
                 <div class="links">
-                    <a href="https://laravel.com/docs">Docs</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://blog.laravel.com">Blog</a>
-                    <a href="https://github.com/Patchx/feathermarksweb">GitHub</a>
+                    <a href="/register">Bookmarks, but better</a>
                 </div>
             </div>
         </div>

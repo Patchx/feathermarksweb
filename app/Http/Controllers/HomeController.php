@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use Auth;
 
+use App\Link;
+
 class HomeController extends Controller
 {
     /**
@@ -32,9 +34,13 @@ class HomeController extends Controller
             $category = 'personal';
         }
 
+        $links = Link::where('user_id', $user->custom_id)
+                    ->where('category', $category)
+                    ->get();
+
         $data = [
             'category' => $category,
-            'links' => $user->links(),
+            'links' => $links,
         ];
 
         return view('home', $data);
