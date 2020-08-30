@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -19,6 +20,7 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
+
 <body>
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
@@ -26,9 +28,7 @@
                 <a 
                     class="navbar-brand" 
                     href="{{ url('/') }}"
-                >
-                    {{ config('app.name', 'Laravel') }}
-                </a>
+                >FeatherMarks</a>
 
                 <div id="navbarSupportedContent">
                     <!-- Right Side Of Navbar -->
@@ -45,33 +45,58 @@
                             @endif
                         @else
                             <div>
-                                <select 
-                                    class="form-control form-control-sm inline-block"
-                                    style="width:110px"
-                                    onchange="window.location.href = '/home?cat=' + this.value" 
-                                >
-                                    <option value="personal">Personal</option>
-                                    
-                                    <option 
-                                        value="work"
-                                        @if($category === 'work')
-                                            selected="true"
-                                        @endif 
-                                    >Work</option>
-                                </select>
+                                <i 
+                                    class="fas fa-user-circle fa-2x text-muted"
+                                    onclick="$('#hover-main-menu').toggle();"
+                                ></i>
 
-                                <form 
-                                    action="{{ route('logout') }}" 
-                                    method="POST" 
-                                    class="inline-block"
+                                <section 
+                                    id="hover-main-menu"
+                                    style="display:none;"
                                 >
-                                    @csrf
+                                    <ul 
+                                        style="
+                                            list-style: none;
+                                            padding-left: 0px;
+                                        "
+                                    >
+                                        <li>
+                                            <select 
+                                                class="form-control"
+                                                style="width:110px"
+                                                onchange="window.location.href = '/home?cat=' + this.value" 
+                                            >
+                                                <option value="personal">Personal</option>
+                                                
+                                                <option 
+                                                    value="work"
+                                                    @if($category === 'work')
+                                                        selected="true"
+                                                    @endif 
+                                                >Work</option>
+                                            </select>
+                                        </li>
 
-                                    <button
-                                        type="submit"
-                                        class="btn btn-link ml-10 text-muted"
-                                    >Logout</button>
-                                </form>
+                                        <li>
+                                            <form 
+                                                action="{{ route('logout') }}" 
+                                                method="POST" 
+                                                class="inline-block"
+                                            >
+                                                @csrf
+
+                                                <button
+                                                    type="submit"
+                                                    class="btn btn-link ml-10 text-muted"
+                                                    style="
+                                                        padding: 0px;
+                                                        margin: 0px;
+                                                    "
+                                                >Logout</button>
+                                            </form>
+                                        </li>
+                                    </ul>
+                                </section>
                             </div>
                         @endguest
                     </ul>
