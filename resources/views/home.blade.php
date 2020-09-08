@@ -2,7 +2,6 @@
 
 @section('head_unique')
     <script async src="https://cse.google.com/cse.js?cx=910818fda3106e175"></script>
-    <script data-ad-client="ca-pub-8452825138565437" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 @endsection
 
 @section('content')
