@@ -9,8 +9,12 @@
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
 
+        {{-- Google Adsense --}}
+        <script data-ad-client="ca-pub-8452825138565437" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
         <!-- Styles -->
         <link href="/css/app.css" rel="stylesheet"></head>
+
         <style>
             html, body {
                 background-color: #fff;
