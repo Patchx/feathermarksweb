@@ -85,6 +85,8 @@
                         </div>
                     </form>
 
+                    <br>
+
                     <div class="gcse-search"></div>
 
                     <h5 class="mt-30 mb-10">Your Links</h5>
