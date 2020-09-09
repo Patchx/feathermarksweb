@@ -10,4 +10,9 @@ class StaticWebController extends Controller
     {
     	return view('welcome');
     }
+
+    public function getSearchResults()
+    {
+    	return view('search-results');
+    }
 }

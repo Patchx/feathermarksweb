@@ -87,7 +87,26 @@
 
                     <br>
 
-                    <div class="gcse-search"></div>
+                    <div class="row">
+                        <div class="col-12">
+                            <label>Search</label>
+
+                            <input
+                                class="form-control"
+                                v-model="search_iframe_query"
+                            />
+                        </div>
+                    </div>
+
+                    <br>
+
+                    <iframe 
+                        :src="searchIframeSrc"
+                        width="100%"
+                        height="400px"
+                        v-if="search_iframe_query !== ''"
+                        v-cloak
+                    ></iframe>
 
                     <h5 class="mt-30 mb-10">Your Links</h5>
 
@@ -122,4 +141,8 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('scripts')
+    <script src="{{ mix('/js/home-page.js') }}"></script>
 @endsection

@@ -10,9 +10,6 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-
     {{-- Google Adsense --}}
     <script data-ad-client="ca-pub-8452825138565437" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 
@@ -21,13 +18,13 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ mix('/css/app.css') }}" rel="stylesheet">
 
     @yield('head_unique')
 </head>
 
 <body>
-    <div id="app">
+    <div id="vue_app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a 
@@ -113,5 +110,8 @@
             @yield('content')
         </main>
     </div>
+
+    <script src="{{ mix('/js/app.js') }}"></script>
+    @yield('scripts')
 </body>
 </html>

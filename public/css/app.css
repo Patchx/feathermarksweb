@@ -11156,6 +11156,10 @@ a.text-dark:focus {
   padding-right: 30px;
 }
 
+[v-cloak] {
+  display: none;
+}
+
 #hover-main-menu {
   position: fixed;
   width: 150px;

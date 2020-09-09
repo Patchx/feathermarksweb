@@ -28,4 +28,5 @@ Route::post('/links/delete/{link_id}', 'LinkWebController@postDelete');
 // - StaticWebController -
 // -----------------------
 
+Route::get('/search-results', 'StaticWebController@getSearchResults');
 Route::get('/', 'StaticWebController@getIndex');
