@@ -144,5 +144,5 @@
 @endsection
 
 @section('scripts')
-    <script src="{{ mix('/js/home-page.js') }}"></script>
+    <script src="{{ mix('/wp/js/home-page.js') }}"></script>
 @endsection

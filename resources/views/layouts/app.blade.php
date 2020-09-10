@@ -18,7 +18,7 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
     <!-- Styles -->
-    <link href="{{ mix('/css/app.css') }}" rel="stylesheet">
+    <link href="{{ mix('/wp/css/app.css') }}" rel="stylesheet">
 
     @yield('head_unique')
 </head>
@@ -111,7 +111,7 @@
         </main>
     </div>
 
-    <script src="{{ mix('/js/app.js') }}"></script>
+    <script src="{{ mix('/wp/js/app.js') }}"></script>
     @yield('scripts')
 </body>
 </html>

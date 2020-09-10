@@ -15,13 +15,13 @@ const mix = require('laravel-mix');
 // - SASS -
 // --------
 
-mix.sass('resources/sass/app.scss', 'public/css').version();
+mix.sass('resources/sass/app.scss', 'public/wp/css').version();
 
 // ------
 // - JS -
 // ------
 
-mix.js('resources/js/app.js', 'public/js').version();
+mix.js('resources/js/app.js', 'public/wp/js').version();
 
-mix.js('resources/js/pages/home-page.js', 'public/js')
+mix.js('resources/js/pages/home-page.js', 'public/wp/js')
    .version();
