@@ -47,17 +47,15 @@ class LinkAjaxController extends Controller
 
     public function postDelete($link_id)
     {
-        // $user = Auth::user();
+        $user = Auth::user();
 
         $link = Link::where('custom_id', $link_id)
                     ->where('user_id', $user->custom_id)
                     ->first();
 
-        if ($link === null) {
-            return redirect()->back()->with('msg_failure', 'Unable to delete this link');
+        if ($link !== null) {
+            $link->delete();
         }
-
-        $link->delete();
 
         return json_encode([
             'status' => 'success',

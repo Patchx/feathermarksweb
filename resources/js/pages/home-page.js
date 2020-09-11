@@ -14,6 +14,12 @@
 		});
 	}
 
+	function deleteLink(vue_app) {
+		axios.post('/links/delete/1s13').catch((error) => {
+			alert(error.response.data.message);
+		});
+	}
+
 	// ----------------
 	// - Vue Instance -
 	// ----------------
@@ -66,6 +72,7 @@
 
 				// Just for testing right now
 				// createLink(this);
+				// deleteLink(this);
 			},
 		},
 	});
