@@ -12,13 +12,14 @@
                 class="mx-auto"
                 style="max-width:550px"
             >
-                <label>Search</label>
+                <label>@{{mainLabelText}}</label>
 
                 <div class="input-group">
                     <input 
                         type="text" 
                         class="form-control" 
                         v-model="main_input_text"
+                        v-on:keyup.enter="searchBarEnterPressed"
                     />
 
                     <div class="input-group-append">
@@ -27,7 +28,17 @@
                             type="button"
                             v-on:click="activateAddBookmarkMode"
                         >
-                            <i class="fas fa-plus"></i>
+                            <i 
+                                v-if="mode === 'add-bookmark'"
+                                v-cloak
+                                class="fas fa-arrow-right"
+                            ></i>
+
+                            <i 
+                                v-else
+                                v-cloak
+                                class="fas fa-plus"
+                            ></i>
                         </button>
                     
                         <button 
