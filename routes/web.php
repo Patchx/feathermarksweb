@@ -13,16 +13,20 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// === AJAX routes ===
+
+// ---------------------
+// - LinkAjaxController -
+// ---------------------
+
+Route::post('/links/create', 'LinkAjaxController@postCreate');
+Route::post('/links/delete/{link_id}', 'LinkAjaxController@postDelete');
+
+// === non-AJAX routes ===
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-
-// ---------------------
-// - LinkWebController -
-// ---------------------
-
-Route::post('/links/create', 'LinkWebController@postCreate');
-Route::post('/links/delete/{link_id}', 'LinkWebController@postDelete');
 
 // -----------------------
 // - StaticWebController -

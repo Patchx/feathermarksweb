@@ -10,9 +10,6 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-    {{-- Google Adsense --}}
-    <script data-ad-client="ca-pub-8452825138565437" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">

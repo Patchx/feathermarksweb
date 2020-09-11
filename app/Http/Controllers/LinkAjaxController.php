@@ -10,7 +10,8 @@ use App\Http\Requests\CreateLinkRequest;
 
 use App\Link;
 
-class LinkWebController extends Controller
+// WIP
+class LinkAjaxController extends Controller
 {
 	public function __construct()
 	{
@@ -39,12 +40,14 @@ class LinkWebController extends Controller
     		'url' => $url,
     	]);
 
-    	return redirect()->back()->with('msg_success', 'Link created successfully');
+        return json_encode([
+            'status' => 'success',
+        ]);
     }
 
     public function postDelete($link_id)
     {
-        $user = Auth::user();
+        // $user = Auth::user();
 
         $link = Link::where('custom_id', $link_id)
                     ->where('user_id', $user->custom_id)
@@ -56,6 +59,8 @@ class LinkWebController extends Controller
 
         $link->delete();
 
-        return redirect()->back()->with('msg_success', 'Link deleted successfully');
+        return json_encode([
+            'status' => 'success',
+        ]);
     }
 }

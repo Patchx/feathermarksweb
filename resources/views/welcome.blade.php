@@ -9,11 +9,8 @@
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
 
-        {{-- Google Adsense --}}
-        <script data-ad-client="ca-pub-8452825138565437" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-
         <!-- Styles -->
-        <link href="/css/app.css" rel="stylesheet"></head>
+        <link href="{{ mix('/wp/css/app.css') }}" rel="stylesheet">
 
         <style>
             html, body {
@@ -85,7 +82,12 @@
             @endif
 
             <div class="content">
-                <div class="title m-b-md">Feather Marks <i class="fas fa-feather-alt"></i></div>
+                <div class="title m-b-md">
+                    <a 
+                        href="/home"
+                        style="color:inherit; text-decoration:inherit"
+                    >Feather Marks <i class="fas fa-feather-alt"></i></a>
+                </div>
 
                 <div class="links">
                     <a href="/register">Bookmarks, but better</a>
