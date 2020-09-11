@@ -16,6 +16,7 @@
 			}
 
 			alert("Success!");
+			vue_app.activateSearchMode();
 		}).catch((error) => {
 			alert(error.response.data.message);
 		});
