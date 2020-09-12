@@ -22,26 +22,10 @@
 		});
 	}
 
-	function deleteLink(vue_app) {
-		axios.post('/links/delete/1s13').catch((error) => {
-			alert(error.response.data.message);
-		});
-	}
-
 	function detectFeatherCommand(vue_app) {
 		if (vue_app.main_input_text.trim() === '--a') {
 			vue_app.main_input_text = '';
-			const params = new URLSearchParams(window.location.search);
-			var category = params.get('cat');
-			var request_url = '/links/my-links';
-
-			if (category !== null) {
-				request_url += '?cat=' + category;
-			}
-
-			axios.get(request_url).then((response) => {
-				console.log(response.data);
-			});
+			fetchAllBookmarks(vue_app);
 		}
 
 		if (vue_app.main_input_text.trim() === '--b') {
@@ -55,6 +39,20 @@
 		}
 	}
 
+	function fetchAllBookmarks(vue_app) {
+		const params = new URLSearchParams(window.location.search);
+		var category = params.get('cat');
+		var request_url = '/links/my-links';
+
+		if (category !== null) {
+			request_url += '?cat=' + category;
+		}
+
+		axios.get(request_url).then((response) => {
+			vue_app.visible_bookmarks = response.data.links;
+		});
+	}
+
 	// ----------------
 	// - Vue Instance -
 	// ----------------
@@ -62,22 +60,24 @@
 	var vue_app = new Vue({
 		el: '#vue_app',
 
-		data: {
-			main_input_text: '',
-			mode: 'search',
-			
+		data: {			
 			draft_bookmark: {
 				url: '',
 				name: '',
 				keywords: '',
 			},
+
+			main_input_text: '',
+			mode: 'search',
+
+			visible_bookmarks: [],
 		},
 
 		computed: {
 			mainLabelText: function() {
 				if (this.mode === 'add-bookmark') {
 					if (this.draft_bookmark.url === '') {
-						return 'Enter URL';
+						return 'New Bookmark: Enter URL';
 					}
 
 					if (this.draft_bookmark.name === '') {
@@ -125,8 +125,9 @@
 			main_input_text: function(after, before) {
 				if (after.length > 0
 					&& after[0] !== '-'
+					&& this.mode === 'feather'
 				) {
-					this.mode = 'search';
+					this.activateSearchMode();
 				}
 
 				if (after.length === 1
@@ -147,6 +148,7 @@
 					this.main_input_text = '';
 				}
 
+				this.visible_bookmarks = [];
 				this.mode = 'search';
 			},
 
@@ -159,11 +161,24 @@
 				this.draft_bookmark.name = '';
 				this.draft_bookmark.keywords = '';
 
+				this.visible_bookmarks = [];
 				this.mode = 'add-bookmark';
+			},
 
-				// Just for testing right now
-				// createLink(this);
-				// deleteLink(this);
+			deleteLink: function(link_id) {
+				var request_url = '/links/delete/' + link_id;
+
+				axios.post(request_url).then((response) => {
+					if (response.data.status !== 'success') {
+						console.log(response);
+						alert('There was an error deleting your link. Please refresh the page and try again');
+						return null;
+					}
+
+					fetchAllBookmarks(this);
+				}).catch((error) => {
+					alert(error.response.data.message);
+				});
 			},
 
 			searchBarEnterPressed: function() {

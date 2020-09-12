@@ -61,6 +61,33 @@
         </div>
     </div>
 
+    <div 
+        v-if="visible_bookmarks.length > 0"
+        v-cloak
+        class="row mt-30"
+    >
+        <div 
+            class="mx-auto"
+            style="max-width:400px"
+        >
+            <p>All Bookmarks</p>
+
+            <p
+                v-for="bookmark in visible_bookmarks"
+            >
+                <a
+                    :href="bookmark.url"
+                    target="_blank"
+                >@{{bookmark.name}}</a>
+
+                <i
+                    v-on:click="deleteLink(bookmark.custom_id)" 
+                    class="fas fa-trash ml-10"
+                ></i>
+            </p>
+        </div>
+    </div>
+
 
     <div class="row justify-content-center mt-25">
         <iframe 
@@ -74,6 +101,20 @@
                 border-radius: 3px;
             "
         ></iframe>
+
+        <div
+            v-else
+            v-cloak
+        >
+            <p>System Commands:</p>
+
+            <span>--a List all bookmarks</span>
+            <br>
+            <span>--b Create a new bookmark</span>
+            <br>
+            <span>--s Switch to search engine</span>
+            <br>
+        </div>
     </div>
 </div>
 @endsection
