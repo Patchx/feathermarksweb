@@ -212,6 +212,7 @@
 			},
 
 			deleteLink: function(link_id) {
+				this.created_bookmark = null;
 				var request_url = '/links/delete/' + link_id;
 
 				axios.post(request_url).then((response) => {
