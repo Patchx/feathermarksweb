@@ -93,6 +93,18 @@
 		createLink(vue_app);
 	}
 
+	function searchMyLinks(vue_app) {
+		var request_url = '/links/search-my-links?q=' + vue_app.main_input_text;
+
+		axios.get(request_url).then((response) => {
+			if (response.data.status === 'success') {
+				vue_app.search_result_bookmarks = response.data.links;
+			}
+		}).catch((error) => {
+			console.log(error);
+		});
+	}
+
 	// ----------------
 	// - Vue Instance -
 	// ----------------
@@ -112,6 +124,7 @@
 			main_input_text: '',
 			mode: 'search',
 
+			search_result_bookmarks: [],
 			visible_bookmarks: [],
 		},
 
@@ -231,6 +244,11 @@
 			searchBarEnterPressed: function() {
 				if (this.mode === 'add-bookmark') {
 					return handleAddBookmarkSubmission(this);
+				}
+
+				// For testing, WIP
+				if (this.mode === 'search') {
+					searchMyLinks(this);
 				}
 			},
 		},

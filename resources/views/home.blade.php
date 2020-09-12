@@ -117,6 +117,28 @@
     </div>
 
     <div class="row justify-content-center mt-25">
+        <div 
+            v-if="showExternalSearchResults"
+            v-cloak
+            class="mb-10"
+        >
+            <p>My Bookmarks (Press Enter to show)</p>
+
+            <p v-for="bookmark in search_result_bookmarks">
+                <i
+                    v-on:click="deleteLink(bookmark.custom_id)" 
+                    class="fas fa-trash text-muted mr-25"
+                    style="font-size:18px"
+                ></i>
+
+                <a
+                    :href="bookmark.url"
+                    target="_blank"
+                    style="font-size:24px"
+                >@{{bookmark.name}}</a>
+            </p>
+        </div>
+
         <iframe 
             :src="searchIframeSrc"
             v-if="showExternalSearchResults"
