@@ -34,6 +34,10 @@
 				console.log(response.data);
 			});
 		}
+
+		if (vue_app.main_input_text.trim() === '--s') {
+			vue_app.activateSearchMode();
+		}
 	}
 
 	// ----------------
@@ -44,7 +48,6 @@
 		el: '#vue_app',
 
 		data: {
-			feather_mode: false,
 			main_input_text: '',
 			mode: 'search',
 			
@@ -73,7 +76,9 @@
 			},
 
 			plusBtnClasses: function() {
-				if (this.mode === 'add-bookmark') {
+				if (this.mode === 'add-bookmark'
+					|| this.mode === 'feather'
+				) {
 					return 'btn btn-primary';
 				}
 
@@ -106,17 +111,17 @@
 				if (after.length > 0
 					&& after[0] !== '-'
 				) {
-					this.feather_mode = false;
+					this.mode = 'search';
 				}
 
 				if (before.length === 1 
 					&& after.length === 2
 					&& after[0] === '-'
 				) {
-					this.feather_mode = true;
+					this.mode = 'feather';
 				}
 
-				if (this.feather_mode) {
+				if (this.mode === 'feather') {
 					detectFeatherCommand(this);
 				}
 			},
@@ -124,6 +129,10 @@
 
 		methods: {
 			activateSearchMode: function() {
+				if (this.mode === 'feather') {
+					this.main_input_text = '';
+				}
+
 				this.mode = 'search';
 			},
 

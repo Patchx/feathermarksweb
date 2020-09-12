@@ -20,6 +20,7 @@
                         class="form-control" 
                         v-model="main_input_text"
                         v-on:keyup.enter="searchBarEnterPressed"
+                        autofocus
                     />
 
                     <div class="input-group-append">
@@ -32,6 +33,12 @@
                                 v-if="mode === 'add-bookmark'"
                                 v-cloak
                                 class="fas fa-arrow-right"
+                            ></i>
+
+                            <i 
+                                v-else-if="mode === 'feather'"
+                                v-cloak
+                                class="fas fa-feather-alt"
                             ></i>
 
                             <i 
