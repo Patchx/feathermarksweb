@@ -23,6 +23,12 @@ Route::post('/links/create', 'LinkAjaxController@postCreate');
 Route::post('/links/delete/{link_id}', 'LinkAjaxController@postDelete');
 Route::get('/links/my-links', 'LinkAjaxController@getMyLinks');
 
+// ---------------------
+// - UrlAjaxController -
+// ---------------------
+
+Route::get('/url/title/{url}', 'UrlAjaxController@getTitle');
+
 // === non-AJAX routes ===
 
 Auth::routes();

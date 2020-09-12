@@ -53,6 +53,41 @@
 		});
 	}
 
+	function getTitleFromUrl(input_url, callback) { 
+		var request_url = '/url/title/' + input_url;
+
+		axios.get(request_url).then((response) => {
+			if (response.data.status === 'success'
+				&& callback !== undefined
+			) {
+				return callback(response.data.title);
+			}
+		}).catch((error) => {
+			console.log(error);
+		});
+	};
+
+	function handleAddBookmarkSubmission(vue_app) {
+		if (vue_app.draft_bookmark.url === '') {
+			vue_app.draft_bookmark.url = vue_app.main_input_text;
+			var url = vue_app.main_input_text;
+			vue_app.main_input_text = '';
+			
+			return getTitleFromUrl(url, (title) => {
+				return vue_app.main_input_text = title;
+			});
+		}
+
+		if (vue_app.draft_bookmark.name === '') {
+			vue_app.draft_bookmark.name = vue_app.main_input_text;
+			return vue_app.main_input_text = '';
+		}
+
+		vue_app.draft_bookmark.keywords = vue_app.main_input_text;
+		vue_app.main_input_text = '';
+		createLink(vue_app);
+	}
+
 	// ----------------
 	// - Vue Instance -
 	// ----------------
@@ -183,19 +218,7 @@
 
 			searchBarEnterPressed: function() {
 				if (this.mode === 'add-bookmark') {
-					if (this.draft_bookmark.url === '') {
-						this.draft_bookmark.url = this.main_input_text;
-						return this.main_input_text = '';
-					}
-
-					if (this.draft_bookmark.name === '') {
-						this.draft_bookmark.name = this.main_input_text;
-						return this.main_input_text = '';
-					}
-
-					this.draft_bookmark.keywords = this.main_input_text;
-					this.main_input_text = '';
-					createLink(this);
+					return handleAddBookmarkSubmission(this);
 				}
 			},
 		},
