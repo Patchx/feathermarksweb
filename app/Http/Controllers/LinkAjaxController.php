@@ -50,10 +50,16 @@ class LinkAjaxController extends Controller
             $url = '//' . $url;
         }
 
+        $category = $request->category;
+
+        if ($category === null) {
+            $category = 'personal';
+        }
+
     	Link::create([
     		'user_id' => $user->custom_id,
     		'folder_id' => null,
-    		'category' => $request->category,
+    		'category' => $category,
     		'name' => $request->name,
     		'url' => $url,
     	]);

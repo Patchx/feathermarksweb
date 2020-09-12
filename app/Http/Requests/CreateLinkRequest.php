@@ -26,7 +26,6 @@ class CreateLinkRequest extends FormRequest
         return [
             'name' => "required|max:100",
             'url' => "required",
-            'category' => "required",
         ];
     }
 }

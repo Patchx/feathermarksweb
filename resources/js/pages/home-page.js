@@ -5,10 +5,13 @@
 	// ---------------------
 
 	function createLink(vue_app) {
+		const params = new URLSearchParams(window.location.search);
+		var category = params.get('cat');
+
 		axios.post('/links/create', {
 			name: vue_app.draft_bookmark.name,
 			url: vue_app.draft_bookmark.url,
-			category: 'personal',
+			category: category,
 		}).then((response) => {
 			if (response.data.status !== 'success') {
 				console.log(response);
