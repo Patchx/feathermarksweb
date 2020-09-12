@@ -30,12 +30,20 @@
 
 	function detectFeatherCommand(vue_app) {
 		if (vue_app.main_input_text.trim() === '--a') {
+			vue_app.main_input_text = '';
+
 			axios.get('/links/my-links').then((response) => {
 				console.log(response.data);
 			});
 		}
 
+		if (vue_app.main_input_text.trim() === '--b') {
+			vue_app.main_input_text = '';
+			vue_app.activateAddBookmarkMode();
+		}
+
 		if (vue_app.main_input_text.trim() === '--s') {
+			vue_app.main_input_text = '';
 			vue_app.activateSearchMode();
 		}
 	}
@@ -114,8 +122,7 @@
 					this.mode = 'search';
 				}
 
-				if (before.length === 1 
-					&& after.length === 2
+				if (after.length === 1
 					&& after[0] === '-'
 				) {
 					this.mode = 'feather';
