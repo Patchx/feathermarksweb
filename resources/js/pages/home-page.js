@@ -31,8 +31,15 @@
 	function detectFeatherCommand(vue_app) {
 		if (vue_app.main_input_text.trim() === '--a') {
 			vue_app.main_input_text = '';
+			const params = new URLSearchParams(window.location.search);
+			var category = params.get('cat');
+			var request_url = '/links/my-links';
 
-			axios.get('/links/my-links').then((response) => {
+			if (category !== null) {
+				request_url += '?cat=' + category;
+			}
+
+			axios.get(request_url).then((response) => {
 				console.log(response.data);
 			});
 		}
