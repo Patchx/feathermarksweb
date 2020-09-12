@@ -75,18 +75,18 @@
         >
             <p>All Bookmarks</p>
 
-            <p
-                v-for="bookmark in visible_bookmarks"
-            >
+            <p v-for="bookmark in visible_bookmarks">
+                <i
+                    v-on:click="deleteLink(bookmark.custom_id)" 
+                    class="fas fa-trash text-muted mr-25"
+                    style="font-size:18px"
+                ></i>
+
                 <a
                     :href="bookmark.url"
                     target="_blank"
+                    style="font-size:24px"
                 >@{{bookmark.name}}</a>
-
-                <i
-                    v-on:click="deleteLink(bookmark.custom_id)" 
-                    class="fas fa-trash ml-10"
-                ></i>
             </p>
         </div>
     </div>
@@ -111,11 +111,11 @@
         >
             <p>System Commands:</p>
 
-            <span>//a List all bookmarks</span>
+            <span class="code-style">//a</span> <span>&nbsp;List all bookmarks</span>
             <br>
-            <span>//b Create a new bookmark</span>
+            <span class="code-style">//b</span> <span>&nbsp; Create a new bookmark</span>
             <br>
-            <span>//s Switch to search engine</span>
+            <span class="code-style">//s</span> <span>&nbsp; Switch to search engine</span>
             <br>
         </div>
     </div>
