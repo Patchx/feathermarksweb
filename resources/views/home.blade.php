@@ -19,7 +19,6 @@
 
                 <div class="input-group">
                     <input 
-                        type="text" 
                         v-model="main_input_text"
                         v-on:keyup.enter="searchBarEnterPressed"
                         type="url"
