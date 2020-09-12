@@ -5,7 +5,10 @@
 @endsection
 
 @section('content')
-<div class="ml-30 mr-30">
+<div 
+    id="homepage_content"
+    class="ml-30 mr-30"
+>
     <div class="row">
         <div class="col-12">
             <div 
@@ -17,10 +20,11 @@
                 <div class="input-group">
                     <input 
                         type="text" 
-                        class="form-control" 
                         v-model="main_input_text"
                         v-on:keyup.enter="searchBarEnterPressed"
+                        type="url"
                         autofocus
+                        class="form-control" 
                     />
 
                     <div class="input-group-append">
@@ -108,11 +112,11 @@
         >
             <p>System Commands:</p>
 
-            <span>--a List all bookmarks</span>
+            <span>//a List all bookmarks</span>
             <br>
-            <span>--b Create a new bookmark</span>
+            <span>//b Create a new bookmark</span>
             <br>
-            <span>--s Switch to search engine</span>
+            <span>//s Switch to search engine</span>
             <br>
         </div>
     </div>

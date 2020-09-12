@@ -23,17 +23,17 @@
 	}
 
 	function detectFeatherCommand(vue_app) {
-		if (vue_app.main_input_text.trim() === '--a') {
+		if (vue_app.main_input_text.trim() === '//a') {
 			vue_app.main_input_text = '';
 			fetchAllBookmarks(vue_app);
 		}
 
-		if (vue_app.main_input_text.trim() === '--b') {
+		if (vue_app.main_input_text.trim() === '//b') {
 			vue_app.main_input_text = '';
 			vue_app.activateAddBookmarkMode();
 		}
 
-		if (vue_app.main_input_text.trim() === '--s') {
+		if (vue_app.main_input_text.trim() === '//s') {
 			vue_app.main_input_text = '';
 			vue_app.activateSearchMode();
 		}
@@ -124,14 +124,14 @@
 		watch: {
 			main_input_text: function(after, before) {
 				if (after.length > 0
-					&& after[0] !== '-'
+					&& after[0] !== '/'
 					&& this.mode === 'feather'
 				) {
 					this.activateSearchMode();
 				}
 
 				if (after.length === 1
-					&& after[0] === '-'
+					&& after[0] === '/'
 				) {
 					this.mode = 'feather';
 				}
