@@ -18,7 +18,7 @@
 				alert("There was an error saving your bookmark. Please refresh the page and try again");
 			}
 
-			alert("Success!");
+			vue_app.created_bookmark = response.data.link;
 			vue_app.activateSearchMode();
 		}).catch((error) => {
 			alert(error.response.data.message);
@@ -77,7 +77,9 @@
 			vue_app.main_input_text = '';
 			
 			return getTitleFromUrl(url, (title) => {
-				return vue_app.main_input_text = title;
+				if (vue_app.main_input_text.length < 1) {
+					return vue_app.main_input_text = title;
+				}
 			});
 		}
 
@@ -98,7 +100,9 @@
 	var vue_app = new Vue({
 		el: '#vue_app',
 
-		data: {			
+		data: {
+			created_bookmark: null,
+
 			draft_bookmark: {
 				url: '',
 				name: '',
@@ -161,6 +165,10 @@
 
 		watch: {
 			main_input_text: function(after, before) {
+				if (after.length > 0) {
+					this.created_bookmark = null;
+				}
+
 				if (after.length > 0
 					&& after[0] !== '/'
 					&& this.mode === 'feather'

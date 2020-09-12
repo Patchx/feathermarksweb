@@ -56,7 +56,7 @@ class LinkAjaxController extends Controller
             $category = 'personal';
         }
 
-    	Link::create([
+    	$new_link = Link::create([
     		'user_id' => $user->custom_id,
     		'folder_id' => null,
     		'category' => $category,
@@ -66,6 +66,7 @@ class LinkAjaxController extends Controller
 
         return json_encode([
             'status' => 'success',
+            'link' => $new_link,
         ]);
     }
 

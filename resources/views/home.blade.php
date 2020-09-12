@@ -91,6 +91,30 @@
         </div>
     </div>
 
+    <div
+        v-if="created_bookmark !== null && mode === 'search'"
+        v-cloak
+        class="row mt-30"
+    >
+        <div 
+            class="mx-auto"
+            style="max-width:400px"
+        >
+            <p>New Bookmark</p>
+
+            <i
+                v-on:click="deleteLink(created_bookmark.custom_id)" 
+                class="fas fa-trash text-muted mr-25"
+                style="font-size:18px"
+            ></i>
+
+            <a
+                :href="created_bookmark.url"
+                target="_blank"
+                style="font-size:24px"
+            >@{{created_bookmark.name}}</a>
+        </div>
+    </div>
 
     <div class="row justify-content-center mt-25">
         <iframe 
