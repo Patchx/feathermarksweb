@@ -10,13 +10,31 @@ use App\Http\Requests\CreateLinkRequest;
 
 use App\Link;
 
-// WIP
 class LinkAjaxController extends Controller
 {
 	public function __construct()
 	{
 		$this->middleware('auth');
 	}
+
+    public function getMyLinks(Request $request)
+    {
+        $user = Auth::user();
+        $category = $request->cat;
+
+        if ($category === null) {
+            $category = 'personal';
+        }
+
+        $links = Link::where('user_id', $user->custom_id)
+                    ->where('category', $category)
+                    ->get();
+
+        return json_encode([
+            'status' => 'success',
+            'links' => $links,
+        ]);
+    }
 
     public function postCreate(CreateLinkRequest $request)
     {

@@ -4,10 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use Auth;
-
-use App\Link;
-
 class HomeController extends Controller
 {
     /**
@@ -27,20 +23,14 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
-        $user = Auth::user();
         $category = $request->cat;
 
         if ($category === null) {
             $category = 'personal';
         }
 
-        $links = Link::where('user_id', $user->custom_id)
-                    ->where('category', $category)
-                    ->get();
-
         $data = [
             'category' => $category,
-            'links' => $links,
         ];
 
         return view('home', $data);
