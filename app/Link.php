@@ -17,10 +17,10 @@ class Link extends AbstractModel
     	'updated_at',
         'custom_id',
         'user_id',
-        'folder_id',
         'category',
         'name',
         'url',
+        'search_phrase',
     ];
 
     // -----------------
@@ -54,5 +54,15 @@ class Link extends AbstractModel
     public function getScoutKeyName()
     {
         return 'custom_id';
+    }
+
+    public function toSearchableArray()
+    {
+        return [
+            "category" => null,
+            "name" => null,
+            "url" => null,
+            "search_phrase" => null,
+        ];
     }
 }

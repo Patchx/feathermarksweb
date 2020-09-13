@@ -40,18 +40,13 @@ class LinkAjaxController extends Controller
     {
         $user = Auth::user();
         
-        $links = Link::search($request->q)->get();
-        $output_links = collect([]);
-
-        foreach ($links as $link) {
-            if ($link->user_id === $user->custom_id) {
-                $output_links->push($link);
-            }
-        }
+        $links = Link::search($request->q)
+                    ->where('user_id', $user->custom_id)
+                    ->get();
 
         return json_encode([
             'status' => 'success',
-            'links' => $output_links,
+            'links' => $links,
         ]);
     }
 
@@ -81,6 +76,7 @@ class LinkAjaxController extends Controller
     		'category' => $category,
     		'name' => $request->name,
     		'url' => $url,
+            'search_phrase' => $request->search_phrase,
     	]);
 
         return json_encode([

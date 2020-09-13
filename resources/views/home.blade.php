@@ -122,7 +122,7 @@
             v-cloak
             class="mb-10"
         >
-            <p>My Bookmarks (Press Enter to show)</p>
+            <p>My Bookmarks</p>
 
             <p v-for="bookmark in search_result_bookmarks">
                 <i

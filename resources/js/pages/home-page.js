@@ -11,6 +11,7 @@
 		axios.post('/links/create', {
 			name: vue_app.draft_bookmark.name,
 			url: vue_app.draft_bookmark.url,
+			search_phrase: vue_app.draft_bookmark.search_phrase,
 			category: category,
 		}).then((response) => {
 			if (response.data.status !== 'success') {
@@ -88,7 +89,7 @@
 			return vue_app.main_input_text = '';
 		}
 
-		vue_app.draft_bookmark.keywords = vue_app.main_input_text;
+		vue_app.draft_bookmark.search_phrase = vue_app.main_input_text;
 		vue_app.main_input_text = '';
 		createLink(vue_app);
 	}
@@ -118,7 +119,7 @@
 			draft_bookmark: {
 				url: '',
 				name: '',
-				keywords: '',
+				search_phrase: '',
 			},
 
 			main_input_text: '',
@@ -139,7 +140,7 @@
 						return 'Name this bookmark';
 					}
 
-					return 'Add some keywords to help find this later';
+					return 'Add a search phrase to help find this later';
 				}
 
 				return 'Search';
@@ -218,7 +219,7 @@
 
 				this.draft_bookmark.url = '';
 				this.draft_bookmark.name = '';
-				this.draft_bookmark.keywords = '';
+				this.draft_bookmark.search_phrase = '';
 
 				this.visible_bookmarks = [];
 				this.mode = 'add-bookmark';
@@ -235,6 +236,7 @@
 						return null;
 					}
 
+					this.search_result_bookmarks = [];
 					fetchAllBookmarks(this);
 				}).catch((error) => {
 					alert(error.response.data.message);
