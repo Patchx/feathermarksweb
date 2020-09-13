@@ -26,6 +26,19 @@
 		});
 	}
 
+	const debouncedSearchMyLinks = (() => {
+		var timeout;
+
+		return (vue_app) => {
+			clearTimeout(timeout);
+		
+			timeout = setTimeout(() => {
+				timeout = null;
+				searchMyLinks(vue_app);
+			}, 300);
+		};
+	})();
+
 	function detectFeatherCommand(vue_app) {
 		if (vue_app.main_input_text.trim() === '//a') {
 			vue_app.main_input_text = '';
@@ -181,6 +194,10 @@
 			main_input_text: function(after, before) {
 				if (after.length > 0) {
 					this.created_bookmark = null;
+
+					if (this.mode === 'search') {
+						debouncedSearchMyLinks(this);
+					}
 				}
 
 				if (after.length > 0
@@ -246,11 +263,6 @@
 			searchBarEnterPressed: function() {
 				if (this.mode === 'add-bookmark') {
 					return handleAddBookmarkSubmission(this);
-				}
-
-				// For testing, WIP
-				if (this.mode === 'search') {
-					searchMyLinks(this);
 				}
 			},
 		},
