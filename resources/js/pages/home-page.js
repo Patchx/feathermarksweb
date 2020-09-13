@@ -108,7 +108,16 @@
 	}
 
 	function searchMyLinks(vue_app) {
-		var request_url = '/links/search-my-links?q=' + vue_app.main_input_text;
+		const params = new URLSearchParams(window.location.search);
+		var category = params.get('cat');
+
+		if (category === null) {
+			category = 'personal';
+		}
+		
+		var request_url = '/links/search-my-links?q=' 
+							+ vue_app.main_input_text
+							+ '&cat=' + category;
 
 		axios.get(request_url).then((response) => {
 			if (response.data.status === 'success') {

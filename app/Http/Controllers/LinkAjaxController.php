@@ -42,6 +42,7 @@ class LinkAjaxController extends Controller
         
         $links = Link::search($request->q)
                     ->where('user_id', $user->custom_id)
+                    ->where('category', $request->cat)
                     ->get();
 
         return json_encode([
