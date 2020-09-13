@@ -21,7 +21,7 @@
                     <input 
                         v-model="main_input_text"
                         v-on:keyup.enter="searchBarEnterPressed"
-                        type="url"
+                        type="text"
                         autofocus
                         class="form-control" 
                     />
