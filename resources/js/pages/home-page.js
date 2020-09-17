@@ -20,7 +20,7 @@
 			}
 
 			vue_app.created_bookmark = response.data.link;
-			vue_app.activateSearchMode();
+			vue_app.activateSearchMode(true);
 		}).catch((error) => {
 			alert(error.response.data.message);
 		});
@@ -52,7 +52,7 @@
 
 		if (vue_app.main_input_text.trim() === '//s') {
 			vue_app.main_input_text = '';
-			vue_app.activateSearchMode();
+			vue_app.activateSearchMode(true);
 		}
 	}
 
@@ -213,7 +213,7 @@
 					&& after[0] !== '/'
 					&& this.mode === 'feather'
 				) {
-					this.activateSearchMode();
+					this.activateSearchMode(false);
 				}
 
 				if (after.length === 1
@@ -229,8 +229,10 @@
 		},
 
 		methods: {
-			activateSearchMode: function() {
-				if (this.mode === 'feather') {
+			activateSearchMode: function(clear_searchbar) {
+				if (this.mode === 'feather'
+					&& clear_searchbar !== false
+				) {
 					this.main_input_text = '';
 				}
 

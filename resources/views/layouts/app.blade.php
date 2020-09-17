@@ -22,88 +22,81 @@
 
 <body>
     <div id="vue_app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            <div class="container">
-                <a 
-                    class="navbar-brand" 
-                    href="{{ url('/') }}"
-                >FeatherMarks</a>
+        <div 
+            class="text-right mt-20 mr-30"
+        >
+            @guest
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                </li>
+                @if(Route::has('register'))
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                    </li>
+                @endif
+            @else
+                <div>
+                    <h5 
+                        class="text-muted"
+                        onclick="$('#hover-main-menu').toggle();"
+                    >
+                        <span>{{ucwords($category)}}&nbsp;</span>
 
-                <div id="navbarSupportedContent">
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ml-auto">
-                        <!-- Authentication Links -->
-                        @guest
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                            </li>
-                            @if(Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                </li>
-                            @endif
-                        @else
-                            <div>
-                                <i 
-                                    class="fas fa-user-circle fa-2x text-muted"
-                                    onclick="$('#hover-main-menu').toggle();"
-                                ></i>
+                        <i class="fas fa-feather-alt fa-lg text-muted"></i>
+                    </h5>
 
-                                <section 
-                                    id="hover-main-menu"
-                                    style="display:none;"
+                    <section 
+                        id="hover-main-menu"
+                        style="display:none;"
+                    >
+                        <ul 
+                            style="
+                                list-style: none;
+                                padding-left: 0px;
+                            "
+                        >
+                            <li>
+                                <select 
+                                    class="form-control"
+                                    style="width:110px"
+                                    onchange="window.location.href = '/home?cat=' + this.value" 
                                 >
-                                    <ul 
+                                    <option value="personal">Personal</option>
+                                    
+                                    <option 
+                                        value="work"
+                                        @if($category === 'work')
+                                            selected="true"
+                                        @endif 
+                                    >Work</option>
+                                </select>
+                            </li>
+
+                            <li>
+                                <form 
+                                    action="{{ route('logout') }}" 
+                                    method="POST" 
+                                    class="inline-block"
+                                >
+                                    @csrf
+
+                                    <button
+                                        type="submit"
+                                        class="btn btn-link ml-10 text-muted"
                                         style="
-                                            list-style: none;
-                                            padding-left: 0px;
+                                            padding: 0px;
+                                            margin: 0px;
                                         "
-                                    >
-                                        <li>
-                                            <select 
-                                                class="form-control"
-                                                style="width:110px"
-                                                onchange="window.location.href = '/home?cat=' + this.value" 
-                                            >
-                                                <option value="personal">Personal</option>
-                                                
-                                                <option 
-                                                    value="work"
-                                                    @if($category === 'work')
-                                                        selected="true"
-                                                    @endif 
-                                                >Work</option>
-                                            </select>
-                                        </li>
-
-                                        <li>
-                                            <form 
-                                                action="{{ route('logout') }}" 
-                                                method="POST" 
-                                                class="inline-block"
-                                            >
-                                                @csrf
-
-                                                <button
-                                                    type="submit"
-                                                    class="btn btn-link ml-10 text-muted"
-                                                    style="
-                                                        padding: 0px;
-                                                        margin: 0px;
-                                                    "
-                                                >Logout</button>
-                                            </form>
-                                        </li>
-                                    </ul>
-                                </section>
-                            </div>
-                        @endguest
-                    </ul>
+                                    >Logout</button>
+                                </form>
+                            </li>
+                        </ul>
+                    </section>
                 </div>
-            </div>
-        </nav>
+            @endguest
+        </div>
 
-        <main class="py-4">
+        <main class="mb-10">
             @yield('content')
         </main>
     </div>
