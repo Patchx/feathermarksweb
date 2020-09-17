@@ -105,4 +105,32 @@ class LinkAjaxController extends Controller
             'status' => 'success',
         ]);
     }
+
+    // Assuming only instaopen commands for now
+    // --
+    public function postRunFeatherCommand(Request $request)
+    {
+        $user = Auth::user();
+        $category = $request->category;
+        $command = trim($request->command, ' /');
+
+        if ($category === null) {
+            $category = 'personal';
+        }
+
+        $link = Link::where('user_id', $user->custom_id)
+                    ->where('instaopen_command', $command)
+                    ->where('category', $category)
+                    ->first();
+
+        if ($link === null) {
+            return json_encode(['status' => 'command_not_found']);
+        }
+
+        return json_encode([
+            'status' => 'success',
+            'directive' => 'open_link',
+            'url' => $link->url,
+        ]);
+    }
 }

@@ -43,17 +43,17 @@
 	function detectFeatherCommand(vue_app) {
 		if (vue_app.main_input_text.trim() === '//a') {
 			vue_app.main_input_text = '';
-			fetchAllBookmarks(vue_app);
+			return fetchAllBookmarks(vue_app);
 		}
 
 		if (vue_app.main_input_text.trim() === '//b') {
 			vue_app.main_input_text = '';
-			vue_app.activateAddBookmarkMode();
+			return vue_app.activateAddBookmarkMode();
 		}
 
 		if (vue_app.main_input_text.trim() === '//s') {
 			vue_app.main_input_text = '';
-			vue_app.activateSearchMode(true);
+			return vue_app.activateSearchMode(true);
 		}
 	}
 
@@ -290,6 +290,33 @@
 			searchBarEnterPressed: function() {
 				if (this.mode === 'add-bookmark') {
 					return handleAddBookmarkSubmission(this);
+				}
+
+				if (this.mode === 'feather') {
+					var command = this.main_input_text;
+					this.main_input_text = '';
+					const params = new URLSearchParams(window.location.search);
+					var category = params.get('cat');
+
+					axios.post('/links/run-feather-command', {
+						command: command,
+						category: category,
+					}).then((response) => {
+						if (response.data.status === 'command_not_found') {
+							return null;
+						}
+
+						if (response.data.status !== 'success') {
+							console.log(response);
+							alert("There was an error running that command. Please refresh the page and try again");
+						}
+
+						if (response.data.directive === 'open_link') {
+							window.location.href = response.data.url;
+						}
+					}).catch((error) => {
+						alert(error.response.data.message);
+					});
 				}
 			},
 		},
