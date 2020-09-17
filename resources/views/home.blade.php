@@ -87,6 +87,17 @@
                     target="_blank"
                     style="font-size:24px"
                 >@{{bookmark.name}}</a>
+
+                <span
+                    v-if="bookmark.instaopen_command !== ''"
+                    v-cloak
+                >
+                    <br>
+                    <span class="text-muted">
+                        <span>Instaopen Command:&nbsp;</span>
+                        <strong class="code-style">/@{{bookmark.instaopen_command}}</strong>
+                    </span>
+                </span>
             </p>
         </div>
     </div>
@@ -113,6 +124,17 @@
                 target="_blank"
                 style="font-size:24px"
             >@{{created_bookmark.name}}</a>
+
+            <span
+                v-if="created_bookmark.instaopen_command !== ''"
+                v-cloak
+            >
+                <br>
+                <span class="text-muted">
+                    <span>Instaopen Command:&nbsp;</span>
+                    <strong class="code-style">/@{{created_bookmark.instaopen_command}}</strong>
+                </span>
+            </span>
         </div>
     </div>
 
@@ -139,6 +161,17 @@
                     target="_blank"
                     style="font-size:24px"
                 >@{{bookmark.name}}</a>
+
+                <span
+                    v-if="bookmark.instaopen_command !== ''"
+                    v-cloak
+                >
+                    <br>
+                    <span class="text-muted">
+                        <span>Instaopen Command:&nbsp;</span>
+                        <strong class="code-style">/@{{bookmark.instaopen_command}}</strong>
+                    </span>
+                </span>
             </p>
         </div>
 

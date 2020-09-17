@@ -71,6 +71,8 @@ class LinkAjaxController extends Controller
             $category = 'personal';
         }
 
+        $instaopen_command = trim($request->instaopen_command, ' /');
+
     	$new_link = Link::create([
     		'user_id' => $user->custom_id,
     		'folder_id' => null,
@@ -78,6 +80,7 @@ class LinkAjaxController extends Controller
     		'name' => $request->name,
     		'url' => $url,
             'search_phrase' => $request->search_phrase,
+            'instaopen_command' => $instaopen_command,
     	]);
 
         return json_encode([

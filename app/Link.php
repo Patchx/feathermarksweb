@@ -21,6 +21,7 @@ class Link extends AbstractModel
         'name',
         'url',
         'search_phrase',
+        'instaopen_command',
     ];
 
     // -----------------
@@ -61,7 +62,6 @@ class Link extends AbstractModel
         return [
             "category" => null,
             "name" => null,
-            "url" => null,
             "search_phrase" => null,
         ];
     }
