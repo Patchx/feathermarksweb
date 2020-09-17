@@ -12,6 +12,7 @@
 			name: vue_app.draft_bookmark.name,
 			url: vue_app.draft_bookmark.url,
 			search_phrase: vue_app.draft_bookmark.search_phrase,
+			instaopen_command: vue_app.draft_bookmark.instaopen_command,
 			category: category,
 		}).then((response) => {
 			if (response.data.status !== 'success') {
@@ -70,6 +71,22 @@
 		});
 	}
 
+	function getBookmarkCreationTitle(vue_app) {
+		if (vue_app.draft_bookmark.url === '') {
+			return 'New Bookmark: Enter URL';
+		}
+
+		if (vue_app.draft_bookmark.name === '') {
+			return 'Name this bookmark';
+		}
+
+		if (vue_app.draft_bookmark.search_phrase === '') {
+			return 'Add a search phrase to help find this later';
+		}
+
+		return 'Add an instaopen command (optional)';
+	}
+
 	function getTitleFromUrl(input_url, callback) { 
 		var request_url = '/url/title/' + input_url;
 
@@ -102,7 +119,12 @@
 			return vue_app.main_input_text = '';
 		}
 
-		vue_app.draft_bookmark.search_phrase = vue_app.main_input_text;
+		if (vue_app.draft_bookmark.search_phrase === '') {
+			vue_app.draft_bookmark.search_phrase = vue_app.main_input_text;
+			return vue_app.main_input_text = '';
+		}
+
+		vue_app.draft_bookmark.instaopen_command = vue_app.main_input_text;
 		vue_app.main_input_text = '';
 		createLink(vue_app);
 	}
@@ -142,6 +164,7 @@
 				url: '',
 				name: '',
 				search_phrase: '',
+				instaopen_command: '',
 			},
 
 			main_input_text: '',
@@ -154,15 +177,7 @@
 		computed: {
 			mainLabelText: function() {
 				if (this.mode === 'add-bookmark') {
-					if (this.draft_bookmark.url === '') {
-						return 'New Bookmark: Enter URL';
-					}
-
-					if (this.draft_bookmark.name === '') {
-						return 'Name this bookmark';
-					}
-
-					return 'Add a search phrase to help find this later';
+					return getBookmarkCreationTitle(this);
 				}
 
 				return 'Search';
@@ -248,6 +263,7 @@
 				this.draft_bookmark.url = '';
 				this.draft_bookmark.name = '';
 				this.draft_bookmark.search_phrase = '';
+				this.draft_bookmark.instaopen_command = '';
 
 				this.visible_bookmarks = [];
 				this.mode = 'add-bookmark';
