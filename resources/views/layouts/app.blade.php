@@ -26,13 +26,13 @@
             class="text-right mt-20 mr-30"
         >
             @guest
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                </li>
+                <a 
+                    href="{{ route('login') }}"
+                    class="mr-25"
+                >{{ __('Login') }}</a>
+
                 @if(Route::has('register'))
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                    </li>
+                    <a href="{{ route('register') }}">{{ __('Register') }}</a>
                 @endif
             @else
                 <div>

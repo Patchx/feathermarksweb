@@ -214,6 +214,10 @@
 			},
 		},
 
+		mounted: function() {
+			document.getElementById("search-bar").focus();
+		},
+
 		watch: {
 			main_input_text: function(after, before) {
 				if (after.length > 0) {

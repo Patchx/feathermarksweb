@@ -19,6 +19,7 @@
 
                 <div class="input-group">
                     <input 
+                        id="search-bar"
                         v-model="main_input_text"
                         v-on:keyup.enter="searchBarEnterPressed"
                         type="text"
