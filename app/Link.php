@@ -60,7 +60,6 @@ class Link extends AbstractModel
     public function toSearchableArray()
     {
         return [
-            "category" => null,
             "name" => null,
             "search_phrase" => null,
         ];
