@@ -6,14 +6,14 @@
 
 	function createLink(vue_app) {
 		const params = new URLSearchParams(window.location.search);
-		var category = params.get('cat');
+		var category_id = params.get('cat_id');
 
 		axios.post('/links/create', {
 			name: vue_app.draft_bookmark.name,
 			url: vue_app.draft_bookmark.url,
 			search_phrase: vue_app.draft_bookmark.search_phrase,
 			instaopen_command: vue_app.draft_bookmark.instaopen_command,
-			category: category,
+			category_id: category_id,
 		}).then((response) => {
 			if (response.data.status !== 'success') {
 				console.log(response);
@@ -59,11 +59,11 @@
 
 	function fetchAllBookmarks(vue_app) {
 		const params = new URLSearchParams(window.location.search);
-		var category = params.get('cat');
+		var category_id = params.get('cat_id');
 		var request_url = '/links/my-links';
 
-		if (category !== null) {
-			request_url += '?cat=' + category;
+		if (category_id !== null) {
+			request_url += '?cat_id=' + category_id;
 		}
 
 		axios.get(request_url).then((response) => {
@@ -131,15 +131,11 @@
 
 	function searchMyLinks(vue_app) {
 		const params = new URLSearchParams(window.location.search);
-		var category = params.get('cat');
-
-		if (category === null) {
-			category = 'personal';
-		}
+		var category_id = params.get('cat_id');
 		
 		var request_url = '/links/search-my-links?q=' 
 							+ vue_app.main_input_text
-							+ '&cat=' + category;
+							+ '&cat_id=' + category_id;
 
 		axios.get(request_url).then((response) => {
 			if (response.data.status === 'success') {
@@ -300,11 +296,11 @@
 					var command = this.main_input_text;
 					this.main_input_text = '';
 					const params = new URLSearchParams(window.location.search);
-					var category = params.get('cat');
+					var category_id = params.get('cat_id');
 
 					axios.post('/links/run-feather-command', {
 						command: command,
-						category: category,
+						category_id: category_id,
 					}).then((response) => {
 						if (response.data.status === 'command_not_found') {
 							return null;

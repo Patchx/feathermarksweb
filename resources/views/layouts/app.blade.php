@@ -40,7 +40,8 @@
                         class="text-muted"
                         onclick="$('#hover-main-menu').toggle();"
                     >
-                        <span>{{ucwords($category)}}&nbsp;</span>
+                        {{-- <span>{{ucwords($category)}}&nbsp;</span> --}}
+                        <span>Work in progress here&nbsp;</span>
 
                         <i class="fas fa-feather-alt fa-lg text-muted"></i>
                     </h5>
@@ -59,16 +60,15 @@
                                 <select 
                                     class="form-control"
                                     style="width:110px"
-                                    onchange="window.location.href = '/home?cat=' + this.value" 
+                                    {{-- onchange="window.location.href = '/home?cat=' + this.value"  --}}
                                 >
-                                    <option value="personal">Personal</option>
-                                    
-                                    <option 
-                                        value="work"
-                                        @if($category === 'work')
-                                            selected="true"
-                                        @endif 
-                                    >Work</option>
+                                    @foreach($categories as $category)
+                                        <option
+                                            @if($category->custom_id === $category_id)
+                                                selected="true"
+                                            @endif 
+                                        >{{ucwords($category->name)}}</option>
+                                    @endforeach
                                 </select>
                             </li>
 

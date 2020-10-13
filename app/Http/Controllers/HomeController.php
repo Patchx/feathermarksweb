@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use Auth;
+
+use App\Category;
+
 class HomeController extends Controller
 {
     /**
@@ -23,14 +27,13 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
-        $category = $request->cat;
+        $user = Auth::user();
 
-        if ($category === null) {
-            $category = 'personal';
-        }
+        $categories = Category::where('user_id', $user->custom_id)->get();
 
         $data = [
-            'category' => $category,
+            'categories' => $categories,
+            'category_id' => $request->cat_id,
         ];
 
         return view('home', $data);
