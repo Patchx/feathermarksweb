@@ -17,7 +17,6 @@ class Link extends AbstractModel
     	'updated_at',
         'custom_id',
         'user_id',
-        'category',
         'category_id',
         'name',
         'url',
