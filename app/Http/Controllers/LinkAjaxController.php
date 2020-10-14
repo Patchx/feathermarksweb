@@ -8,6 +8,9 @@ use Auth;
 
 use App\Http\Requests\CreateLinkRequest;
 
+use App\Classes\Repositories\LinkRepository;
+
+use App\Category;
 use App\Link;
 
 class LinkAjaxController extends Controller
@@ -17,17 +20,15 @@ class LinkAjaxController extends Controller
 		$this->middleware('auth');
 	}
 
-    public function getMyLinks(Request $request)
-    {
+    public function getMyLinks(
+        LinkRepository $link_repo,
+        Request $request
+    ) {
         $user = Auth::user();
-        $category = $request->cat;
-
-        if ($category === null) {
-            $category = 'personal';
-        }
+        $category = $link_repo->getUserCategory($request->cat_id, $user);
 
         $links = Link::where('user_id', $user->custom_id)
-                    ->where('category', $category)
+                    ->where('category_id', $category->custom_id)
                     ->get();
 
         return json_encode([
@@ -36,13 +37,16 @@ class LinkAjaxController extends Controller
         ]);
     }
 
-    public function getSearchMyLinks(Request $request)
-    {
+    public function getSearchMyLinks(
+        LinkRepository $link_repo,
+        Request $request
+    ) {
         $user = Auth::user();
-        
+        $category = $link_repo->getUserCategory($request->cat_id, $user);
+
         $links = Link::search($request->q)
                     ->where('user_id', $user->custom_id)
-                    ->where('category', $request->cat)
+                    ->where('category_id', $category->custom_id)
                     ->get();
 
         return json_encode([
@@ -51,8 +55,10 @@ class LinkAjaxController extends Controller
         ]);
     }
 
-    public function postCreate(CreateLinkRequest $request)
-    {
+    public function postCreate(
+        LinkRepository $link_repo,
+        CreateLinkRequest $request
+    ) {
     	$user = Auth::user();
         $url = $request->url;
 
@@ -65,18 +71,16 @@ class LinkAjaxController extends Controller
             $url = '//' . $url;
         }
 
-        $category = $request->category;
-
-        if ($category === null) {
-            $category = 'personal';
-        }
+        $category = $link_repo->getUserCategory(
+            $request->category_id, $user
+        );
 
         $instaopen_command = trim($request->instaopen_command, ' /');
 
     	$new_link = Link::create([
     		'user_id' => $user->custom_id,
     		'folder_id' => null,
-    		'category' => $category,
+    		'category_id' => $category->custom_id,
     		'name' => $request->name,
     		'url' => $url,
             'search_phrase' => $request->search_phrase,
@@ -101,26 +105,26 @@ class LinkAjaxController extends Controller
             $link->delete();
         }
 
-        return json_encode([
-            'status' => 'success',
-        ]);
+        return json_encode(['status' => 'success']);
     }
 
     // Assuming only instaopen commands for now
     // --
-    public function postRunFeatherCommand(Request $request)
-    {
+    public function postRunFeatherCommand(
+        LinkRepository $link_repo,
+        Request $request
+    ) {
         $user = Auth::user();
-        $category = $request->category;
-        $command = trim($request->command, ' /');
 
-        if ($category === null) {
-            $category = 'personal';
-        }
+        $category = $link_repo->getUserCategory(
+            $request->category_id, $user
+        );
+
+        $command = trim($request->command, ' /');
 
         $link = Link::where('user_id', $user->custom_id)
                     ->where('instaopen_command', $command)
-                    ->where('category', $category)
+                    ->where('category_id', $category->custom_id)
                     ->first();
 
         if ($link === null) {
