@@ -41,7 +41,7 @@
                         onclick="$('#hover-main-menu').toggle();"
                     >
                         {{-- <span>{{ucwords($category)}}&nbsp;</span> --}}
-                        <span>{{ucwords($active_category_name)}}&nbsp;</span>
+                        <span>{{ucwords($active_category->name)}}&nbsp;</span>
 
                         <i class="fas fa-feather-alt fa-lg text-muted"></i>
                     </h5>
@@ -65,7 +65,7 @@
                                     @foreach($categories as $category)
                                         <option
                                             value="{{$category->custom_id}}"
-                                            @if($category->custom_id === $request_category_id)
+                                            @if($category->custom_id === $active_category->custom_id)
                                                 selected="true"
                                             @endif 
                                         >{{ucwords($category->name)}}</option>

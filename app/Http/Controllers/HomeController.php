@@ -48,9 +48,8 @@ class HomeController extends Controller
         }
 
         $data = [
-            'active_category_name' => $active_category->name,
+            'active_category' => $active_category,
             'categories' => $categories,
-            'request_category_id' => $request->cat_id,
             'html_title' => $html_title,
         ];
 
