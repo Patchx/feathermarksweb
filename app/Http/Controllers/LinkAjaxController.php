@@ -21,11 +21,11 @@ class LinkAjaxController extends Controller
 	}
 
     public function getMyLinks(
-        CategoryRepository $link_repo,
+        CategoryRepository $category_repo,
         Request $request
     ) {
         $user = Auth::user();
-        $category = $link_repo->getUserCategory($request->cat_id, $user);
+        $category = $category_repo->getUserCategory($request->cat_id, $user);
 
         $links = Link::where('user_id', $user->custom_id)
                     ->where('category_id', $category->custom_id)
@@ -38,11 +38,11 @@ class LinkAjaxController extends Controller
     }
 
     public function getSearchMyLinks(
-        CategoryRepository $link_repo,
+        CategoryRepository $category_repo,
         Request $request
     ) {
         $user = Auth::user();
-        $category = $link_repo->getUserCategory($request->cat_id, $user);
+        $category = $category_repo->getUserCategory($request->cat_id, $user);
 
         $links = Link::search($request->q)
                     ->where('user_id', $user->custom_id)
@@ -56,7 +56,7 @@ class LinkAjaxController extends Controller
     }
 
     public function postCreate(
-        CategoryRepository $link_repo,
+        CategoryRepository $category_repo,
         CreateLinkRequest $request
     ) {
     	$user = Auth::user();
@@ -71,7 +71,7 @@ class LinkAjaxController extends Controller
             $url = '//' . $url;
         }
 
-        $category = $link_repo->getUserCategory(
+        $category = $category_repo->getUserCategory(
             $request->category_id, $user
         );
 
@@ -111,12 +111,12 @@ class LinkAjaxController extends Controller
     // Assuming only instaopen commands for now
     // --
     public function postRunFeatherCommand(
-        CategoryRepository $link_repo,
+        CategoryRepository $category_repo,
         Request $request
     ) {
         $user = Auth::user();
 
-        $category = $link_repo->getUserCategory(
+        $category = $category_repo->getUserCategory(
             $request->category_id, $user
         );
 
