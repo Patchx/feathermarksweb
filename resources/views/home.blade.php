@@ -85,7 +85,6 @@
 
                 <a
                     :href="bookmark.url"
-                    target="_blank"
                     style="font-size:24px"
                 >@{{bookmark.name}}</a>
 
@@ -122,7 +121,6 @@
 
             <a
                 :href="created_bookmark.url"
-                target="_blank"
                 style="font-size:24px"
             >@{{created_bookmark.name}}</a>
 
@@ -159,7 +157,6 @@
 
                 <a
                     :href="bookmark.url"
-                    target="_blank"
                     style="font-size:24px"
                 >@{{bookmark.name}}</a>
 
