@@ -65,7 +65,7 @@
                                     @foreach($categories as $category)
                                         <option
                                             value="{{$category->custom_id}}"
-                                            @if($category->custom_id === $category_id)
+                                            @if($category->custom_id === $request_category_id)
                                                 selected="true"
                                             @endif 
                                         >{{ucwords($category->name)}}</option>
