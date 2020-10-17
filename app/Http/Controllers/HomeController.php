@@ -30,7 +30,6 @@ class HomeController extends Controller
         $user = Auth::user();
         $active_category_id = $request->cat_id;
         $active_category_name = 'personal';
-
         $categories = Category::where('user_id', $user->custom_id)->get();
 
         foreach ($categories as $category) {
@@ -40,10 +39,17 @@ class HomeController extends Controller
             }
         }
 
+        if ($request->cat_id === null) {
+            $html_title = 'FeatherMarks';
+        } else {
+            $html_title = 'FeatherMarks - ' . ucwords($active_category_name);
+        }
+
         $data = [
             'active_category_name' => $active_category_name,
             'categories' => $categories,
             'category_id' => $active_category_id,
+            'html_title' => $html_title,
         ];
 
         return view('home', $data);

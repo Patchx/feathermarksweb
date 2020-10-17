@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', $html_title)
+
 @section('head_unique')
     <script async src="https://cse.google.com/cse.js?cx=910818fda3106e175"></script>
 @endsection
