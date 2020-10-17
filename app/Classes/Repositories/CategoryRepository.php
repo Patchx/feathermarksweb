@@ -5,7 +5,7 @@ namespace App\Classes\Repositories;
 use App\Category;
 use App\User;
 
-class LinkRepository
+class CategoryRepository
 {
 	public function getUserCategory($category_id, User $user)
 	{

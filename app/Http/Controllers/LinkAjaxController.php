@@ -8,7 +8,7 @@ use Auth;
 
 use App\Http\Requests\CreateLinkRequest;
 
-use App\Classes\Repositories\LinkRepository;
+use App\Classes\Repositories\CategoryRepository;
 
 use App\Category;
 use App\Link;
@@ -21,7 +21,7 @@ class LinkAjaxController extends Controller
 	}
 
     public function getMyLinks(
-        LinkRepository $link_repo,
+        CategoryRepository $link_repo,
         Request $request
     ) {
         $user = Auth::user();
@@ -38,7 +38,7 @@ class LinkAjaxController extends Controller
     }
 
     public function getSearchMyLinks(
-        LinkRepository $link_repo,
+        CategoryRepository $link_repo,
         Request $request
     ) {
         $user = Auth::user();
@@ -56,7 +56,7 @@ class LinkAjaxController extends Controller
     }
 
     public function postCreate(
-        LinkRepository $link_repo,
+        CategoryRepository $link_repo,
         CreateLinkRequest $request
     ) {
     	$user = Auth::user();
@@ -111,7 +111,7 @@ class LinkAjaxController extends Controller
     // Assuming only instaopen commands for now
     // --
     public function postRunFeatherCommand(
-        LinkRepository $link_repo,
+        CategoryRepository $link_repo,
         Request $request
     ) {
         $user = Auth::user();
