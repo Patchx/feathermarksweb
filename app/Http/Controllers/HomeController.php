@@ -38,6 +38,9 @@ class HomeController extends Controller
             $request->cat_id, $user
         );
         
+        $user->latest_category_id = $active_category->custom_id;
+        $user->save();
+
         if ($request->cat_id === null) {
             $html_title = 'FeatherMarks';
         } else {

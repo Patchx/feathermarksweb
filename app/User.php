@@ -27,6 +27,7 @@ class User extends Authenticatable
         'created_at',
         'updated_at',
         'custom_id',
+        'latest_category_id',
     ];
 
     /**
