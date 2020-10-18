@@ -301,8 +301,10 @@ import edit_link_modal from '../components/EditLinkModal';
 				});
 			},
 
-			openLinkEditor: function(link_id) {
-				this.$modal.show('edit-link-modal');
+			openLinkEditor: function(bookmark_data) {
+				this.$modal.show('edit-link-modal', {
+					componentProps: bookmark_data,
+				});
 			},
 
 			searchBarEnterPressed: function() {

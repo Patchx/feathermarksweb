@@ -90,7 +90,7 @@
                 ></i>
 
                 <i
-                    v-on:click="openLinkEditor(bookmark.custom_id)" 
+                    v-on:click="openLinkEditor(bookmark)" 
                     class="fas fa-edit text-muted mr-25"
                     style="font-size:18px"
                 ></i>
@@ -131,6 +131,12 @@
                 style="font-size:18px"
             ></i>
 
+            <i
+                v-on:click="openLinkEditor(created_bookmark)" 
+                class="fas fa-edit text-muted mr-25"
+                style="font-size:18px"
+            ></i>
+
             <a
                 :href="created_bookmark.url"
                 style="font-size:24px"
@@ -164,6 +170,12 @@
                 <i
                     v-on:click="deleteLink(bookmark.custom_id)" 
                     class="fas fa-trash text-muted mr-25"
+                    style="font-size:18px"
+                ></i>
+
+                <i
+                    v-on:click="openLinkEditor(bookmark)" 
+                    class="fas fa-edit text-muted mr-25"
                     style="font-size:18px"
                 ></i>
 
