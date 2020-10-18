@@ -72,6 +72,13 @@ class LinkAjaxController extends Controller
 
         $instaopen_command = trim($request->instaopen_command, ' /');
 
+        if ($instaopen_command !== '') {
+            Link::where('user_id', $user->custom_id)
+                ->where('instaopen_command', $instaopen_command)
+                ->where('category_id', $category->custom_id)
+                ->update(['instaopen_command' => '']);
+        }
+
     	$new_link = Link::create([
     		'user_id' => $user->custom_id,
     		'folder_id' => null,
