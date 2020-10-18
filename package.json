@@ -33,6 +33,7 @@
         "vue-template-compiler": "^2.6.10"
     },
     "dependencies": {
-        "@fortawesome/fontawesome-free": "^5.13.1"
+        "@fortawesome/fontawesome-free": "^5.13.1",
+        "vue-js-modal": "^2.0.0-rc.6"
     }
 }

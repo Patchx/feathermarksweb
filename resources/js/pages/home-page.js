@@ -1,4 +1,14 @@
 
+// ----------------
+// - Dependencies -
+// ----------------
+
+import edit_link_modal from '../components/EditLinkModal';
+
+// -----------------
+// - Main Function -
+// -----------------
+
 (() => {
 	// ---------------------
 	// - Private Functions -
@@ -170,6 +180,10 @@
 			visible_bookmarks: [],
 		},
 
+		components: {
+			'edit-link-modal': edit_link_modal,
+		},
+
 		computed: {
 			mainLabelText: function() {
 				if (this.mode === 'add-bookmark') {
@@ -285,6 +299,10 @@
 				}).catch((error) => {
 					alert(error.response.data.message);
 				});
+			},
+
+			openLinkEditor: function(link_id) {
+				this.$modal.show('edit-link-modal');
 			},
 
 			searchBarEnterPressed: function() {

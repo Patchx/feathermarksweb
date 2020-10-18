@@ -7,6 +7,10 @@
 @endsection
 
 @section('content')
+{{-- Modals --}}
+<edit-link-modal></edit-link-modal>
+{{-- End Modals --}}
+
 <div 
     id="homepage_content"
     class="ml-30 mr-30"
@@ -82,6 +86,12 @@
                 <i
                     v-on:click="deleteLink(bookmark.custom_id)" 
                     class="fas fa-trash text-muted mr-25"
+                    style="font-size:18px"
+                ></i>
+
+                <i
+                    v-on:click="openLinkEditor(bookmark.custom_id)" 
+                    class="fas fa-edit text-muted mr-25"
                     style="font-size:18px"
                 ></i>
 
