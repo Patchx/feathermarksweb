@@ -62,12 +62,7 @@ class LinkAjaxController extends Controller
     	$user = Auth::user();
         $url = $request->url;
 
-        $starts_with_protocol = (
-            strpos($url, "https://") === 0
-            || strpos($url, "http://") === 0
-        );
-
-        if (!$starts_with_protocol) {
+        if (!$this->urlStartsWithProtocol($url)) {
             $url = '//' . $url;
         }
 
@@ -136,5 +131,20 @@ class LinkAjaxController extends Controller
             'directive' => 'open_link',
             'url' => $link->url,
         ]);
+    }
+
+    // -------------------
+    // - Private Methods -
+    // -------------------
+
+    private function urlStartsWithProtocol($url)
+    {
+        if (strpos($url, "https://") === 0
+            || strpos($url, "http://") === 0
+        ) {
+            return true;
+        }
+
+        return $url[0] === '/' && $url[1] === '/';
     }
 }
