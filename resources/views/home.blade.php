@@ -8,7 +8,9 @@
 
 @section('content')
 {{-- Modals --}}
-<edit-link-modal></edit-link-modal>
+<edit-link-modal
+    v-on:saved="handleLinkEdited"
+></edit-link-modal>
 {{-- End Modals --}}
 
 <div 

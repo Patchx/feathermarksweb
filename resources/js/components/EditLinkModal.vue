@@ -30,32 +30,33 @@
                 <p class="edit-link-modal-p">Name</p>
 
                 <input
-                    :value="link_name"
+                    v-model="link_name"
                     class="form-control mb-15"
                 />
 
                 <p class="edit-link-modal-p">URL</p>
 
                 <input
-                    :value="link_url"
+                    v-model="link_url"
                     class="form-control mb-15"
                 />
 
                 <p class="edit-link-modal-p">Search Phrase</p>
 
                 <input
-                    :value="search_phrase"
+                    v-model="search_phrase"
                     class="form-control mb-15"
                 />
 
                 <p class="edit-link-modal-p">Instaopen Command</p>
 
                 <input
-                    :value="instaopen_command"
+                    v-model="instaopen_command"
                     class="form-control mb-15"
                 />
 
                 <button
+                    v-on:click="submitForm"
                     class="btn btn-primary mt-15"
                     style="width: 100%"
                 >Save</button>
@@ -72,6 +73,7 @@ module.exports = (function() {
         data: function() {
             return {
                 instaopen_command: '',
+                link_id: '',
                 link_name: '',
                 link_url: '',
                 search_phrase: '',
@@ -86,9 +88,26 @@ module.exports = (function() {
             handleBeforeOpen: function(event) {
                 const props = event.params.componentProps;
                 this.instaopen_command = props.instaopen_command;
+                this.link_id = props.custom_id;
                 this.link_name = props.name;
                 this.link_url = props.url;
                 this.search_phrase = props.search_phrase;
+            },
+
+            submitForm: function() {
+                var url = '/links/edit/' + this.link_id;
+
+                axios.post(url, {
+                    name: this.link_name,
+                    url: this.link_url,
+                    search_phrase: this.search_phrase,
+                    instaopen_command: this.instaopen_command,
+                }).then((response) => {
+                    this.$emit('saved');
+                    this.closeModal();
+                }).catch((error) => {
+                    console.log(error);
+                });
             },
         },
     };

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Auth;
 
 use App\Http\Requests\CreateLinkRequest;
+use App\Http\Requests\EditLinkRequest;
 
 use App\Classes\Repositories\CategoryRepository;
 
@@ -106,6 +107,31 @@ class LinkAjaxController extends Controller
         if ($link !== null) {
             $link->delete();
         }
+
+        return json_encode(['status' => 'success']);
+    }
+
+    public function postEdit(
+        EditLinkRequest $request,
+        $link_id
+    ) {
+        $user = Auth::user();
+
+        $link = Link::where('custom_id', $link_id)
+                    ->where('user_id', $user->custom_id)
+                    ->first();
+
+        if ($link === null) {
+            return json_encode(['status' => 'link_not_found']);
+        }
+
+        $instaopen_command = trim($request->instaopen_command, ' /');
+
+        $link->name = $request->name;
+        $link->url = $request->url;
+        $link->search_phrase = $request->search_phrase;
+        $link->instaopen_command = $instaopen_command;
+        $link->save();
 
         return json_encode(['status' => 'success']);
     }

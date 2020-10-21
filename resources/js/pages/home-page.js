@@ -177,6 +177,7 @@ import edit_link_modal from '../components/EditLinkModal';
 			mode: 'search',
 
 			search_result_bookmarks: [],
+			temporary_msg: '',
 			visible_bookmarks: [],
 		},
 
@@ -186,6 +187,10 @@ import edit_link_modal from '../components/EditLinkModal';
 
 		computed: {
 			mainLabelText: function() {
+				if (this.temporary_msg !== '') {
+					return this.temporary_msg;
+				}
+
 				if (this.mode === 'add-bookmark') {
 					return getBookmarkCreationTitle(this);
 				}
@@ -231,6 +236,7 @@ import edit_link_modal from '../components/EditLinkModal';
 		watch: {
 			main_input_text: function(after, before) {
 				if (after.length > 0) {
+					this.temporary_msg = '';
 					this.created_bookmark = null;
 
 					if (this.mode === 'search') {
@@ -299,6 +305,13 @@ import edit_link_modal from '../components/EditLinkModal';
 				}).catch((error) => {
 					alert(error.response.data.message);
 				});
+			},
+
+			handleLinkEdited: function() {
+				this.visible_bookmarks = [];
+				this.main_input_text = '';
+				this.mode = 'search';
+				this.temporary_msg = 'Link edited successfully!';
 			},
 
 			openLinkEditor: function(bookmark_data) {
